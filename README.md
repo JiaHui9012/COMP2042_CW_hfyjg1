@@ -1,1 +1,2 @@
-# COMP2042_CW_hfyjg1
+# Screenshot of Game
+![alt text](https://raw.githubusercontent.com/hirish99/Frogger-Arcade-Game/master/arcade.png)
