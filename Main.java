@@ -26,9 +26,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,600,800);
-
-		BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/Screen Shot 2017-05-29 at 10.02.14 PM.png");
+	    Scene scene  = new Scene(background,564,800);
+		BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png");
 	    
 		background.add(froggerback);
 		
@@ -48,11 +47,11 @@ public class Main extends Application {
 		background.add(new WetTurtle(400, 217, -1, 130, 130));
 		background.add(new WetTurtle(200, 217, -1, 130, 130));
 	
-		background.add(new End(13,96));
-		background.add(new End(141,96));
-		background.add(new End(141 + 141-13,96));
-		background.add(new End(141 + 141-13+141-13+1,96));
-		background.add(new End(141 + 141-13+141-13+141-13+3,96));
+		background.add(new End(10,96));
+		background.add(new End(130,96));
+		background.add(new End(130 + 130-10,96));
+		background.add(new End(130 + 130-10+130-10,96));
+		background.add(new End(130 + 130-10+130-10+130-10+3,96));
 		animal = new Animal("file:src/p4_group_8_repo/resources/froggerUp.png");
 		background.add(animal);
 		background.add(new Obstacle("file:src/p4_group_8_repo/resources/truck1"+"Right.png", 0, 649, 1, 120, 120));
@@ -65,7 +64,7 @@ public class Main extends Application {
 		background.add(new Obstacle("file:src/p4_group_8_repo/resources/truck2Right.png", 0, 540, 1, 200, 200));
 		background.add(new Obstacle("file:src/p4_group_8_repo/resources/truck2Right.png", 500, 540, 1, 200, 200));
 		background.add(new Obstacle("file:src/p4_group_8_repo/resources/car1Left.png", 500, 490, -5, 50, 50));
-		background.add(new Digit(0, 30, 360, 25));
+		background.add(new Digit(0, 30, 500, 30));
 		background.start();
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -110,7 +109,7 @@ public class Main extends Application {
     		  int d = n / 10;
     		  int k = n - d * 10;
     		  n = d;
-    		  background.add(new Digit(k, 30, 360 - shift, 25));
+    		  background.add(new Digit(k, 30, 500 - shift, 30));
     		  shift+=30;
     	}
     }

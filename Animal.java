@@ -113,7 +113,7 @@ public class Animal extends Actor {
 		if (getX()<0) {
 			move(movement*2, 0);
 		}
-		if (getX()>600) {
+		if (getX()>555) {
 			move(-movement*2, 0);
 		}
 		if (carDeath) {
