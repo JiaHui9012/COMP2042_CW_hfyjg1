@@ -27,7 +27,6 @@ public class Animal extends Actor {
 	private int imgSize = 40;
 	private boolean carDeath = false;
 	private boolean waterDeath = false;
-	private boolean stop = false;
 	private boolean changeScore = false;
 	private int carD = 0;
 	private double w = 800;
@@ -157,9 +156,6 @@ public class Animal extends Actor {
 		}
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
-		}
-		if (getX() == 240 && getY() == 82) {
-			stop = true;
 		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			if(getIntersectingObjects(Log.class).get(0).getLeft())
