@@ -1,5 +1,6 @@
 package p4_group_8_repo;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 
@@ -48,6 +49,12 @@ public abstract class Actor extends ImageView{
             }
         }
         return someArray.get(0);
+    }
+    
+    public void setImageXY(double x, double y, Image img) {
+    	setX(x);
+		setY(y);
+		setImage(img);
     }
 
     public abstract void act(long now);

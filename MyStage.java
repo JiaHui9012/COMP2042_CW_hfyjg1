@@ -7,26 +7,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MyStage extends World{
-	MediaPlayer mediaPlayer;
-	@Override
-	public void act(long now) {
-		
-	}
+	private MediaPlayer mediaPlayer;
 	
-	public MyStage() {
-		
-//		mediaPlayer.play();
-//		mediaPlayer.setOnEndOfMedia(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				mediaPlayer.seek(Duration.ZERO);
-//				
-//			}
-//			
-//		});
-//		mediaPlayer.play();
-	}
+	@Override
+	public void act(long now) {}
+	
+	public MyStage() {}
 	
 	public void playMusic() {
 		String musicFile = "src/p4_group_8_repo/resources/Frogger Main Song Theme (loop).mp3";   

@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 public class Log extends Actor {
 
 	private double speed;
+	
 	@Override
 	public void act(long now) {
 		move(speed , 0);
@@ -15,9 +16,7 @@ public class Log extends Actor {
 	}
 	
 	public Log(String imageLink, int size, int xpos, int ypos, double s) {
-		setImage(new Image(imageLink, size,size, true, true));
-		setX(xpos);
-		setY(ypos);
+		setImageXY(xpos,ypos,new Image(imageLink, size,size, true, true));
 		speed = s;
 		
 	}
