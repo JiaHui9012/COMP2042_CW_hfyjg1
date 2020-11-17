@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private AnimationTimer timer;
-	private MyStage background;
+	private MyStage background = new MyStage();;
 	private Animal animal;
 	private TextField nameEnter;
 	
@@ -26,9 +27,15 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		Scene scene  = new Scene(background,564,800);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		start(); 
+		startGame();	
+	}
+	
+	public void startGame() {
 		animal = new Animal("file:src/p4_group_8_repo/resources/froggerUp.png");
-	    background = new MyStage();
-	    Scene scene  = new Scene(background,564,800);
 	    BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png");
 		StartEndScreen start = new StartEndScreen("file:src/p4_group_8_repo/resources/theFrog.png", 230, 20, 170, 0.75);
 		Text name = new Text("Enter Your Name");
@@ -44,10 +51,6 @@ public class Main extends Application {
 		Text infotext2 = new Text("On the bottom half of the screen, \nthe player must successfully guide \nthe frog between opposing lanes of \ntrucks, cars, and other vehicles, to \navoid becoming roadkill.");
 		Text infotext3 = new Text("The middle of the screen, after the \nroad, contains a median where the \nplayer must prepare to navigate the \nriver by jumping on swiftly moving \nlogs and the backs of turtles.");
 		Text infotext4 = new Text("The top of the screen contains five \n\"frog homes\" which are the \ndestinations for each frog. When all \nfive frogs are directed home, the \ngame ends.");
-		
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		start(); 
 		
 		background.add(froggerback);
 		background.add(start);
@@ -156,7 +159,6 @@ public class Main extends Application {
 		 
 		    }
 		});
-		
 	}
 	
 	public void createTimer() {
@@ -180,8 +182,7 @@ public class Main extends Application {
             		background.add(endingBackground);
             		scorelist.WriteReadFile(animal.getPoints(), nameEnter.getText());
     						
-    	            System.out.print("STOPP:");
-    	            background.stopMusic();
+            		System.out.print("STOPP\n");
     	            stop();
     	            background.stop();
     						
@@ -209,6 +210,29 @@ public class Main extends Application {
 		    				break;
 		    			}
 		    		}
+		    		
+		    		Button playAgain = new Button("PLay Again");
+		    		scorelist.addButton(playAgain, 110, 700, 150, 50);
+		    		background.getChildren().add(playAgain);
+		    		playAgain.setOnAction(new EventHandler<ActionEvent>() { //if the start button gets pressed
+		    			@Override
+		    		    public void handle(ActionEvent event) {
+		    				background.getChildren().clear();
+		    				start();
+		    				startGame();
+		    			}
+		    		});
+		    		
+		    		Button quit = new Button("Quit");
+		    		scorelist.addButton(quit, 300, 700, 150, 50);
+		    		background.getChildren().add(quit);
+		    		quit.setOnAction(new EventHandler<ActionEvent>() { //if the start button gets pressed
+		    			@Override
+		    		    public void handle(ActionEvent event) {
+		    				background.stopMusic();
+		    	            Platform.exit();
+		    			}
+		    		});
             	}
             }
         };
