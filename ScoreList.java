@@ -9,10 +9,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ScoreList extends StartEndScreen {
 
 	ArrayList<Integer> arrayscore = new ArrayList<Integer>();
+	ArrayList<String> arrayname = new ArrayList<String>();
+	Map<String, Integer> unsortedresult;
+	Map<String, Integer> result;
+	String name;
 	
 	public ScoreList() {
 		// TODO Auto-generated constructor stub
@@ -23,15 +31,14 @@ public class ScoreList extends StartEndScreen {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ScoreList(int point) {
-		
+	public void WriteReadFile(int point, String name) {
 		File file= new File("Score.txt");
 		try { 
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 			BufferedWriter output = new BufferedWriter(new FileWriter(file, true)); //write the score into the file
-	        output.append("" + point);
+	        output.append(name + " " + point);
 	        output.newLine();
 	        output.close();
 			System.out.println("File Written Successfully");
@@ -46,12 +53,21 @@ public class ScoreList extends StartEndScreen {
 	        String line = reader.readLine();
 	        while (line != null) 
 	        {
-	            int score = Integer.parseInt(line.trim()); 
-	            arrayscore.add(score); //add the score into the array list
-            	Collections.sort(arrayscore,Collections.reverseOrder()); //sort the array in descending order
+	        	String [] words = line.split(" ");
+	            arrayscore.add(Integer.parseInt(words[1])); //add the score into the array list
+	            arrayname.add(words[0]);
 	            line = reader.readLine();
 	        }
 	        reader.close();
+	        unsortedresult = new HashMap<String, Integer>();
+	        for(int i=0;i<arrayscore.size();i++) {
+	        	unsortedresult.put(arrayname.get(i), arrayscore.get(i));
+	        }
+	        result = unsortedresult
+	        		.entrySet()
+	        		.stream()
+	        		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+	        		.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
 	    }
 		catch (FileNotFoundException e1) {
 	            System.out.println("The specified file not found" + e1);
@@ -59,11 +75,10 @@ public class ScoreList extends StartEndScreen {
 		catch (IOException ex) {
 	        System.err.println("ERROR reading scores from file");
 	    }
-		
 	}
 	
-	public ArrayList<Integer> getScoreList() {
-		return arrayscore;
+	public Map<String, Integer> getScoreList() {
+		return result;
 	}
 
 }

@@ -1,6 +1,7 @@
 package p4_group_8_repo;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -8,14 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	AnimationTimer timer;
-	MyStage background;
-	Animal animal;
+	private AnimationTimer timer;
+	private MyStage background;
+	private Animal animal;
+	private TextField nameEnter;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -28,6 +31,7 @@ public class Main extends Application {
 	    Scene scene  = new Scene(background,564,800);
 	    BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png");
 		StartEndScreen start = new StartEndScreen("file:src/p4_group_8_repo/resources/theFrog.png", 230, 20, 170, 0.75);
+		Text name = new Text("Enter Your Name");
 		Button startButton = new Button("Start");
 		Button infoButton = new Button("How To Play");
 		Text about = new Text("About");
@@ -51,15 +55,22 @@ public class Main extends Application {
 		background.getChildren().add(about);
 		start.addText(abouttext,"Verdana",20,Color.WHITE,260,250);
 		background.getChildren().add(abouttext);
-		start.addButton(startButton, 215, 530, 150, 50);
+		start.addText(name,"Verdana",25,Color.WHITE,80,550);
+		background.getChildren().add(name);
+		nameEnter = new TextField("Player");
+		start.addTextField(nameEnter,330,530);
+		background.getChildren().add(nameEnter);
+		start.addButton(startButton, 200, 580, 150, 50);
 		background.getChildren().add(startButton);
-		start.addButton(infoButton, 215, 600, 150, 50);
+		start.addButton(infoButton, 200, 630, 150, 50);
 		background.getChildren().add(infoButton);
 		
 		infoButton.setOnAction(new EventHandler<ActionEvent>() { //if the info button gets pressed
 			@Override
 		    public void handle(ActionEvent event) {
 
+				background.getChildren().remove(name);
+				background.getChildren().remove(nameEnter);
 				background.remove(start);
 				background.getChildren().remove(about);
 				background.getChildren().remove(abouttext);
@@ -87,6 +98,8 @@ public class Main extends Application {
 			@Override
 		    public void handle(ActionEvent event) {
 		        
+				background.getChildren().remove(name);
+				background.getChildren().remove(nameEnter);
 				background.remove(start);
 				background.getChildren().remove(about);
 				background.getChildren().remove(abouttext);
@@ -155,36 +168,47 @@ public class Main extends Application {
             	}
             	if (animal.getStop()) {
             		int size=10;
+            		int i=0;
             		ArrayList<String> arrayScoreString = new ArrayList<String>();
-            		ScoreList scorelist = new ScoreList(animal.getPoints()); //store the score to file
+            		ScoreList scorelist = new ScoreList(); //store the score to file
             		BackgroundImage endingBackground = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png");
             		Text ScoreTitle1 = new Text("You Have Won The Game!");
-            		Text ScoreTitle2 = new Text("Your Score: "+animal.getPoints()+"!");
-            		Text ScoreTitle3 = new Text("Highest Possible Score: 800");
-            		Text ScoreTitle4 = new Text("High Scores");
-            		
-            		System.out.print("STOPP:");
-            		background.stopMusic();
-            		stop();
-            		background.stop();
-            		
+    	            Text ScoreTitle2 = new Text("Your Score: "+animal.getPoints()+"!");
+    	            Text ScoreTitle3 = new Text("Highest Possible Score: 800");
+    	            Text ScoreTitle4 = new Text("High Scores");
+    	            
             		background.add(endingBackground);
-            		scorelist.addText(ScoreTitle1,"Verdana",30,Color.WHITE,100,200);
-    				background.getChildren().add(ScoreTitle1);
-    				scorelist.addText(ScoreTitle2,"Verdana",25,Color.WHITE,180,240);
-    				background.getChildren().add(ScoreTitle2);
-    				scorelist.addText(ScoreTitle3,"Verdana",15,Color.WHITE,180,270);
-    				background.getChildren().add(ScoreTitle3);
-    				scorelist.addText(ScoreTitle4,"Verdana",25,Color.WHITE,100,320);
-    				background.getChildren().add(ScoreTitle4);
-    				if(scorelist.getScoreList().size()<10)
-    					size=scorelist.getScoreList().size();
-    				for(int i=0; i<size; i++) {
-    					arrayScoreString.add(Integer.toString(scorelist.getScoreList().get(i))); //change the integer to string
-    					Text t = new Text((i+1)+")    "+arrayScoreString.get(i));
-    					scorelist.addText(t, "Verdana", 20, Color.WHITE, 100, 360+(i*30));
-    					background.getChildren().add(t); //show scores to the screen
-    				}
+            		scorelist.WriteReadFile(animal.getPoints(), nameEnter.getText());
+    						
+    	            System.out.print("STOPP:");
+    	            background.stopMusic();
+    	            stop();
+    	            background.stop();
+    						
+		            scorelist.addText(ScoreTitle1,"Verdana",30,Color.WHITE,100,200);
+		    		background.getChildren().add(ScoreTitle1);
+		    		scorelist.addText(ScoreTitle2,"Verdana",25,Color.WHITE,180,240);
+		    		background.getChildren().add(ScoreTitle2);
+		    		scorelist.addText(ScoreTitle3,"Verdana",15,Color.WHITE,180,270);
+		    		background.getChildren().add(ScoreTitle3);
+		    		scorelist.addText(ScoreTitle4,"Verdana",25,Color.WHITE,100,320);
+		    		background.getChildren().add(ScoreTitle4);
+
+	    			Set <String> keys = scorelist.getScoreList().keySet();
+		    		if(scorelist.getScoreList().size()<10){ 
+		    			size=scorelist.getScoreList().size(); }
+		    		for(String key:keys) {
+		    			arrayScoreString.add(Integer.toString(scorelist.getScoreList().get(key))); //change the integer to string
+		    		}
+		    		for(String key:keys) {
+		    			Text t = new Text((i+1)+")  "+key+"   "+arrayScoreString.get(i));
+		    			scorelist.addText(t, "Verdana", 20, Color.WHITE, 100, 360+(i*30));
+		    			background.getChildren().add(t); //show scores to the screen
+		    			i++;
+		    			if(i==size) {
+		    				break;
+		    			}
+		    		}
             	}
             }
         };
