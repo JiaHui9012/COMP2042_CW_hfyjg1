@@ -7,8 +7,8 @@ public class BackgroundImage extends Actor{
 	@Override
 	public void act(long now) {}
 	
-	public BackgroundImage(String imageLink) {
-		setImage(new Image(imageLink, 600, 800, true, true));
+	public BackgroundImage(String imageLink, int size1, int size2) {
+		setImage(new Image(imageLink, size1, size2, true, true));
 	}
 
 }

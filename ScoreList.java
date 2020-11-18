@@ -25,11 +25,6 @@ public class ScoreList extends StartEndScreen {
 	public ScoreList() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public ScoreList(String imageLink, int size, int xpos, int ypos, double s) {
-		super(imageLink, size, xpos, ypos, s);
-		// TODO Auto-generated constructor stub
-	}
 	
 	public void WriteReadFile(int point, String name) {
 		File file= new File("Score.txt");

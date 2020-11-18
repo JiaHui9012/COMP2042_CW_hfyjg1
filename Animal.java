@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 public class Animal extends Actor {
 	private Image imgW1;
 	private Image imgA1;
@@ -30,7 +29,11 @@ public class Animal extends Actor {
 	private boolean changeScore = false;
 	private int carD = 0;
 	private double w = 800;
+	private int life=5;
+	private double speed[] = new double[4];
 	ArrayList<End> inter = new ArrayList<End>();
+	
+	public Animal() {}
 	
 	public Animal(String imageLink) {
 		setImageXY(300, 679.8+movement, new Image(imageLink, imgSize, imgSize, true, true));
@@ -80,24 +83,24 @@ public class Animal extends Actor {
 			public void handle(KeyEvent event) {
 				if (noMove) {}
 				else {
-				if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.UP) {	  
-					if (getY() < w) {
-						changeScore = true;
-						w = getY();
-						setPoints(getPoints()+10);
-					}
-					setMoveImageSecond(0, -movement, imgW1, false);
-	            }
-	            else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {	            	
-	            	setMoveImageSecond(-movementX, 0, imgA1, false);
-	            }
-	            else if (event.getCode() == KeyCode.S || event.getCode() == KeyCode.DOWN) {	            	
-	            	setMoveImageSecond(0, movement, imgS1, false);
-	            }
-	            else if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {	            	
-	            	setMoveImageSecond(movementX, 0, imgD1, false);
-	            }
-	        }
+					if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.UP) {	  
+						if (getY() < w) {
+							changeScore = true;
+							w = getY();
+							setPoints(getPoints()+10);
+						}
+						setMoveImageSecond(0, -movement, imgW1, false);
+		            }
+		            else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {	            	
+		            	setMoveImageSecond(-movementX, 0, imgA1, false);
+		            }
+		            else if (event.getCode() == KeyCode.S || event.getCode() == KeyCode.DOWN) {	            	
+		            	setMoveImageSecond(0, movement, imgS1, false);
+		            }
+		            else if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {	            	
+		            	setMoveImageSecond(movementX, 0, imgD1, false);
+		            }
+				}
 			}
 			
 		});
@@ -159,18 +162,18 @@ public class Animal extends Actor {
 		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
+				move(speed[0],0);
 			else
-				move (.75,0);
+				move (speed[1],0);
 		}
 		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
+			move(speed[2],0);
 		}
 		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 				waterDeath = true;
 			} else {
-				move(-1,0);
+				move(speed[3],0);
 			}
 		}
 		else if (getIntersectingObjects(End.class).size() >= 1) {
@@ -196,6 +199,22 @@ public class Animal extends Actor {
 		return end==5;
 	}
 	
+	public void setEnd() {
+		end=0;
+	}
+	
+	public int getEnd() {
+		return end;
+	}
+	
+	public void setLife(int life) {
+		this.life=life;
+	}
+	
+	public int getLife() {
+		return this.life;
+	}
+	
 	public void setPoints(int points) {
 		this.points=points;
 	}
@@ -219,6 +238,7 @@ public class Animal extends Actor {
 	}
 	
 	public void deathReset(boolean cardeath, boolean waterdeath) {
+		life--;
 		setImageXY(300, 679.8+movement, new Image("file:src/p4_group_8_repo/resources/froggerUp.png", imgSize, imgSize, true, true));
 		if(cardeath) { carDeath = false;}
 		else if(waterdeath) { waterDeath = false;}
@@ -228,6 +248,13 @@ public class Animal extends Actor {
 			setPoints(getPoints()-50); //points-=50;
 			changeScore = true;
 		}
+	}
+	
+	public void getSpeed(double log, double logLeft, double turtle, double wetTurtle) {
+		speed[0] = log;
+		speed[1] = logLeft;
+		speed[2] = turtle;
+		speed[3] = wetTurtle;
 	}
 
 }
