@@ -4,6 +4,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * this class represents Level 1 of the game
+ * adding all the needed things into level 1's scene
+ * @author Jia Hui
+ *
+ */
 public class Level1 extends World {
 
 	public Level1(MyStage background, Animal animal, TextField nameEnter, BackgroundImage froggerback) {

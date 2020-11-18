@@ -4,6 +4,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * this class represents Level 3 of the game
+ * adding all the needed things into level 3's scene
+ * @author Jia Hui
+ *
+ */
 public class Level3 extends World {
 
 	GameLife life1 =  new GameLife(30, 500, 750);
@@ -66,6 +72,11 @@ public class Level3 extends World {
 		background.start();
 	}
 	
+	/**
+	 * this method is to remove the life if the animal dies
+	 * @param background
+	 * @param life
+	 */
 	public void removeLife(MyStage background, int life) {
 		if(life==5) {	}
 		else if(life==4) {

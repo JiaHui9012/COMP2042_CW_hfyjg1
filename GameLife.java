@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the game life
+ * @author Jia Hui
+ *
+ */
 public class GameLife extends Actor {
 
 	private Image im1;

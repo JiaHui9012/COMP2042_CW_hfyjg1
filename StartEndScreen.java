@@ -8,6 +8,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * this class represent the starting and ending scene for the game
+ * @author Jia Hui
+ *
+ */
 public class StartEndScreen extends World {
 
 	public StartEndScreen() {}
@@ -28,7 +33,7 @@ public class StartEndScreen extends World {
 		Text infotext3 = new Text("The middle of the screen, after the \nroad, contains a median where the \nplayer must prepare to navigate the \nriver by jumping on swiftly moving \nlogs and the backs of turtles.");
 		Text infotext4 = new Text("The top of the screen contains five \n\"frog homes\" which are the \ndestinations for each frog. When all \nfive frogs are directed home, the \ngame ends.");
 		
-		background.add(froggerback);
+		background.add(froggerback); //add background
 		start.setX(20);
 		start.setY(170);
 		background.add(start);
@@ -101,11 +106,14 @@ public class StartEndScreen extends World {
 		    	background.getChildren().remove(startButton);
 				background.getChildren().remove(name);
 				background.getChildren().remove(nameEnter);
-				new Level1(background,animal,nameEnter,froggerback);
+				new Level1(background,animal,nameEnter,froggerback); // go to level 1
 			}
 		});
 	}
 	
+	/**
+	 * set up the text
+	 */
 	public void addText(Text text, String font, double fontsize, Color color, double x, double y) {
 		text.setFont(Font.font (font, fontsize));
 		text.setFill(color);
@@ -113,6 +121,9 @@ public class StartEndScreen extends World {
 		text.setY(y);
 	}
 	
+	/**
+	 * set up button
+	 */
 	public void addButton(Button button, double x, double y, double a, double b) {
     	button.setLayoutX(x);
 		button.setLayoutY(y);
@@ -120,6 +131,9 @@ public class StartEndScreen extends World {
 		button.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 2em; -fx-font-weight: bold;");
 	}
 	
+	/**
+	 * set up text field
+	 */
 	public void addTextField(TextField text, double x, double y) {
 		text.setLayoutX(x);
 		text.setLayoutY(y);

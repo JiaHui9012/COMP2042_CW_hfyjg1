@@ -14,6 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * this class represents the ending score list 
+ * it is to save and read the score for each round into/from a file
+ * @author Jia Hui
+ *
+ */
 public class ScoreList extends StartEndScreen {
 
 	ArrayList<Integer> arrayscore = new ArrayList<Integer>();
@@ -33,7 +39,7 @@ public class ScoreList extends StartEndScreen {
 				file.createNewFile();
 			}
 			BufferedWriter output = new BufferedWriter(new FileWriter(file, true)); //write the score into the file
-	        output.append(name + " " + point);
+	        output.append(name + " " + point); //write the name and score
 	        output.newLine();
 	        output.close();
 			System.out.println("File Written Successfully");
@@ -42,26 +48,25 @@ public class ScoreList extends StartEndScreen {
 			ioe.printStackTrace();
 		} 
 		
-		//read the file
 		try {
-	        BufferedReader reader = new BufferedReader(new FileReader(file));
+	        BufferedReader reader = new BufferedReader(new FileReader(file));  //read the file
 	        String line = reader.readLine();
 	        while (line != null) 
 	        {
-	        	String [] words = line.split(" ");
+	        	String [] words = line.split(" "); //separate name and score by indicate space bar
 	            arrayscore.add(Integer.parseInt(words[1])); //add the score into the array list
-	            arrayname.add(words[0]);
+	            arrayname.add(words[0]); //add name to array list
 	            line = reader.readLine();
 	        }
 	        reader.close();
-	        unsortedresult = new HashMap<String, Integer>();
+	        unsortedresult = new HashMap<String, Integer>(); //map the name and score 
 	        for(int i=0;i<arrayscore.size();i++) {
 	        	unsortedresult.put(arrayname.get(i), arrayscore.get(i));
 	        }
 	        result = unsortedresult
 	        		.entrySet()
 	        		.stream()
-	        		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+	        		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue())) // sort the score in descending order
 	        		.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
 	    }
 		catch (FileNotFoundException e1) {

@@ -5,6 +5,11 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * this class represents the stage and background music of the game
+ * @author Jia Hui
+ *
+ */
 public class MyStage extends World{
 	private MediaPlayer mediaPlayer;
 	

@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the wet turtle
+ * @author Jia Hui
+ *
+ */
 public class WetTurtle extends Actor{
 	private Image turtle1;
 	private Image turtle2;

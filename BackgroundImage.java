@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class is to set the images that needed in the game
+ * @author Jia Hui
+ *
+ */
 public class BackgroundImage extends Actor{
 
 	@Override

@@ -2,6 +2,10 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the log object
+ * set the image, speed, how it act
+ */
 public class Log extends Actor {
 
 	private double speed;

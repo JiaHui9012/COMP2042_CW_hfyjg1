@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the obstacle and its action
+ * @author Jia Hui
+ *
+ */
 public class Obstacle extends Actor {
 	private double speed;
 	

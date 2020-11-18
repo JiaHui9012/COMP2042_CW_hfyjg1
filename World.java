@@ -13,7 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
-
+/**
+ * this class represents the game world
+ * it can add/remove the actors to the world and make the actor starts its action/animation
+ * @author Jia Hui
+ *
+ */
 public abstract class World extends Pane {
     private AnimationTimer timer;
     
@@ -62,6 +67,9 @@ public abstract class World extends Pane {
 		});
     }
 
+    /**
+     * make the actors start acting their movement
+     */
     public void createTimer() {
         timer = new AnimationTimer() {
             @Override

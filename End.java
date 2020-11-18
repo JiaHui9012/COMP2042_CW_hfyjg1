@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the destinations of the animal(frog)
+ * @author Jia Hui
+ *
+ */
 public class End extends Actor{
 	private boolean activated = false;
 	
