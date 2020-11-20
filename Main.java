@@ -22,9 +22,12 @@ public class Main extends Application {
 	private BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800);
 	private TextField nameEnter = new TextField("Player");
 	private boolean nextLevel=false;
-	private boolean stopGame=false;
 	private int levelCount=1;
-	private Level3 level3;
+	private GameLife life1 =  new GameLife(30, 500, 750);
+	private GameLife life2 =  new GameLife(30, 470, 750);
+	private GameLife life3 =  new GameLife(30, 440, 750);
+	private GameLife life4 =  new GameLife(30, 410, 750);
+	private GameLife life5 =  new GameLife(30, 380, 750);
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -45,16 +48,27 @@ public class Main extends Application {
 	}
 	
 	public void Level2() {
-		new Level2(background,animal,nameEnter,froggerback);
+		new Level2(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 		
 	}
 	
 	public void Level3() {
-		level3 = new Level3(background,animal,nameEnter,froggerback);
+		new Level3(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
-		stopGame=true;
+		nextLevel=true;
+	}
+	
+	public void Level4() {
+		new Level4(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		setNumber(animal.getPoints());
+		nextLevel=true;
+	}
+	
+	public void Level5() {
+		new Level5(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		setNumber(animal.getPoints());
 	}
 	
 	public void createTimer() {
@@ -64,8 +78,8 @@ public class Main extends Application {
             	if (animal.changeScore()) {
             		setNumber(animal.getPoints());
             	}
-            	if(animal.getLife()<5&&levelCount==3) {
-            		level3.removeLife(background, animal.getLife());
+            	if(animal.getLife()<5&&levelCount!=1) {
+            		removeLife(background, animal.getLife());
             	}
             	if(animal.getStop()&&nextLevel) {
             		levelCount++;
@@ -77,13 +91,19 @@ public class Main extends Application {
             		animal.setLife(5);
             		nextLevel=false;
             		if(levelCount==2) {
-            			Level2();
+            			Level3();
             		}
             		else if(levelCount==3) {
             			Level3();
             		}
+            		else if(levelCount==4) {
+            			Level4();
+            		}
+            		else if(levelCount==5) {
+            			Level5();
+            		}
     			}
-            	if ((animal.getStop()||animal.getLife()==0)&&stopGame) {
+            	if ((animal.getStop()||animal.getLife()==0)&&levelCount!=1) {
             		int size=10;
             		int i=0;
             		ArrayList<String> arrayScoreString = new ArrayList<String>();
@@ -144,7 +164,6 @@ public class Main extends Application {
 		    				animal.setEnd();
 		    				start();
 		    				startGame();
-		    				stopGame=false;
 		    				levelCount=1;
 		    			}
 		    		});
@@ -177,11 +196,40 @@ public class Main extends Application {
     public void setNumber(int n) {
     	int shift = 0;
     	while (n > 0) {
-    		  int d = n / 10;
-    		  int k = n - d * 10;
-    		  n = d;
-    		  background.add(new Digit(k, 30, 500 - shift, 30));
-    		  shift+=30;
+    		int d = n / 10;
+    		int k = n - d * 10;
+    		n = d;
+    		background.add(new Digit(k, 30, 500 - shift, 30));
+    		if(animal.getChangeDigit()) {
+    		background.add(new Digit(0, 30, 470 - shift, 30));
+    		}
+    		shift+=30;
     	}
+    	animal.setChangeDigit();
     }
+    
+    /**
+	 * this method is to remove the life if the animal dies
+	 * @param background
+	 * @param life
+	 */
+	public void removeLife(MyStage background, int life) {
+		if(life==5) {	}
+		else if(life==4) {
+			background.remove(life5);
+		}
+		else if(life==3) {
+			background.remove(life4);
+		}
+		else if(life==2) {
+			background.remove(life3);
+		}
+		else if(life==1) {
+			background.remove(life2);
+		}
+		else if(life==0) {
+			background.remove(life1);
+		}
+	}
+	
 }

@@ -35,6 +35,7 @@ public class Animal extends Actor {
 	private boolean carDeath = false;
 	private boolean waterDeath = false;
 	private boolean changeScore = false;
+	private boolean changeDigit=false;
 	private int carD = 0;
 	private double w = 800;
 	private int life=5;
@@ -172,6 +173,9 @@ public class Animal extends Actor {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {  //if the frog gets intersecting with the obstacle, then carDeath=true
 			carDeath = true;
 		}
+		if (getIntersectingObjects(Snake.class).size() >= 1) {  //if the frog gets intersecting with the obstacle, then carDeath=true
+			carDeath = true;
+		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {  //if the frog gets intersecting with the log
 			if(getIntersectingObjects(Log.class).get(0).getLeft())
 				move(speed[0],0); //move the animal in the speed with the object
@@ -192,12 +196,31 @@ public class Animal extends Actor {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied 
 				end--;
-				setPoints(getPoints()-50); //points-=50; deduct the points
+				deductPoints(); //points-=50; deduct the points
 			}
 			setPoints(getPoints()+50);  //points+=50; earn points
 			changeScore = true;
 			w=800;
 			getIntersectingObjects(End.class).get(0).setEnd();
+			end++;
+			setX(300);
+			setY(679.8+movement);
+		}
+		else if(getIntersectingObjects(Fly.class).size() >= 1) {
+			if (getIntersectingObjects(Fly.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied 
+				end--;
+				deductPoints(); //points-=50; deduct the points
+			}
+			else {
+				if(getIntersectingObjects(Fly.class).get(0).isOccupied()) {
+					setPoints(getPoints()+100);
+				}
+				else {
+					setPoints(getPoints()+50);
+				}
+			}
+			changeScore = true;
+			getIntersectingObjects(Fly.class).get(0).setEnd();
 			end++;
 			setX(300);
 			setY(679.8+movement);
@@ -250,6 +273,24 @@ public class Animal extends Actor {
 		return points;
 	}
 	
+	public void deductPoints() {
+		if (getPoints()>50) {
+			int temp=getPoints();
+			setPoints(getPoints()-50);
+			if((temp+"").length()>(getPoints()+"").length()) {
+				changeDigit=true;
+			}
+		}
+	}
+	
+	public void setChangeDigit() {
+		changeDigit=false;
+	}
+	
+	public boolean getChangeDigit() {
+		return changeDigit;
+	}
+	
 	/**
 	 * this method is used to indicate if the screen needs to change score 
 	 * @return
@@ -287,10 +328,8 @@ public class Animal extends Actor {
 		else if(waterdeath) { waterDeath = false;}
 		carD = 0;
 		noMove = false;
-		if (getPoints()>50) {
-			setPoints(getPoints()-50); //points-=50;
-			changeScore = true;
-		}
+		deductPoints();
+		changeScore = true;
 	}
 	
 	/**

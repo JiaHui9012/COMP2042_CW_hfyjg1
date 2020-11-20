@@ -106,7 +106,7 @@ public class StartEndScreen extends World {
 		    	background.getChildren().remove(startButton);
 				background.getChildren().remove(name);
 				background.getChildren().remove(nameEnter);
-				new Level1(background,animal,nameEnter,froggerback); // go to level 1
+				new Level1(background,animal,froggerback); // go to level 1
 			}
 		});
 	}
