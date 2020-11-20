@@ -94,10 +94,18 @@ public abstract class World extends Pane {
         timer.stop();
     }
     
+    /**
+     * this method is to add the actor into the game world
+     * @param actor it is the actor from Actor class
+     */
     public void add(Actor actor) {
         getChildren().add(actor);
     }
 
+    /**
+     * this method is to remove the actor from the game world
+     * @param actor it is from Actor class 
+     */
     public void remove(Actor actor) {
         getChildren().remove(actor);
     }

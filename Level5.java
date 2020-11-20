@@ -3,6 +3,13 @@ package p4_group_8_repo;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * this class represents Level 5 of the game
+ * this class is to add all the needed things into level 5's scene
+ * This level includes all objects in level 4, but their speed has changed more faster
+ * @author Jia Hui
+ *
+ */
 public class Level5 extends World {
 
 	public Level5(MyStage background, Animal animal, BackgroundImage froggerback, GameLife life1, GameLife life2, GameLife life3, GameLife life4, GameLife life5) {
@@ -34,7 +41,7 @@ public class Level5 extends World {
 		background.add(new Fly(130 + 130-10+130-10,96));
 		background.add(new Fly(130 + 130-10+130-10+130-10+3,96));
 		
-		background.add(new Snake("file:src/p4_group_8_repo/resources/snakeRight.png", 0, 430, 5, 50, 50));
+		background.add(new Snake("file:src/p4_group_8_repo/resources/snakeRight.png", 0, 430, 4, 50, 50));
 		
 		background.add(animal);
 		animal.getSpeed(-2.2, 1.35, -1.3, -1.2);

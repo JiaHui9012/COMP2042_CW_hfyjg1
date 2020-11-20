@@ -7,18 +7,23 @@ import java.util.Set;
 
 import org.junit.Test;
 
+/**
+ * this is a JUnit test to test the ScoreList class by using JUnit 4
+ * @author Jia Hui
+ *
+ */
 public class ScoreListTest {
 
 	ScoreList score1 = new ScoreList();
 	
 	@Test
-	public void testArrayListSizeNotEmpty() {
-		score1.WriteReadFile(666, "Ben");
-		assertTrue(score1.getScoreList().size()!=0);
+	public void testArrayListSizeNotEmpty() { 
+		score1.WriteReadFile(666, "Ben"); //write the score and name to the file
+		assertTrue(score1.getScoreList().size()!=0); //check if the file size is not equal to 0
 	}
 
 	@Test
-	public void testArrayListIsSorted() {
+	public void testArrayListIsSorted() { //test if the scores read into the array have been sorted in descending order
 		boolean sorted = false;
 		score1.WriteReadFile(666, "Ben");
 		Set <String> keys = score1.getScoreList().keySet();

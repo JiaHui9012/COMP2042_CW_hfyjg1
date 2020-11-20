@@ -39,8 +39,10 @@ public abstract class Actor extends ImageView{
     }
 
     /**
-     * The method is to find out if the objects intersect.
-     * 
+     * The method is to get the intersected objects.
+     * @param <A> the parameter extends Actor
+     * @param cls the parameter is the Actor class
+     * @return return list
      */
     public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
         ArrayList<A> someArray = new ArrayList<A>();
@@ -80,8 +82,8 @@ public abstract class Actor extends ImageView{
     }
 
     /**
-     * this method is to represent the action of the object
-     * @param now
+     * this method is to represent the action of the object, how the object is going to act
+     * @param now it is the current running time when the application starts 
      */
     public abstract void act(long now);
 

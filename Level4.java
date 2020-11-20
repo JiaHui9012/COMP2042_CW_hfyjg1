@@ -3,12 +3,19 @@ package p4_group_8_repo;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**
+ * this class represents Level 4 of the game
+ * this class is to add all the needed things into level 4's scene
+ * This level includes all objects in level 3 and the newly added Snake
+ * @author Jia Hui
+ *
+ */
 public class Level4 extends World {
 
 	public Level4(MyStage background, Animal animal, BackgroundImage froggerback, GameLife life1, GameLife life2, GameLife life3, GameLife life4, GameLife life5) {
 		// TODO Auto-generated constructor stub
 		StartEndScreen start = new StartEndScreen();
-		Text level = new Text("Level 4: Avoid Snake");
+		Text level = new Text("Level 4: Watch Out For Snake!");
 		
 		background.add(froggerback);
 		background.add(new Log("file:src/p4_group_8_repo/resources/log3.png", 150, 0, 166, 0.75));
@@ -34,7 +41,7 @@ public class Level4 extends World {
 		background.add(new Fly(130 + 130-10+130-10,96));
 		background.add(new Fly(130 + 130-10+130-10+130-10+3,96));
 		
-		background.add(new Snake("file:src/p4_group_8_repo/resources/snakeRight.png", 0, 430, 3, 50, 50));
+		background.add(new Snake("file:src/p4_group_8_repo/resources/snakeRight.png", 0, 430, 3, 50, 50)); //add snake into the game
 		
 		background.add(animal);
 		animal.getSpeed(-2, 0.75, -1, -1);

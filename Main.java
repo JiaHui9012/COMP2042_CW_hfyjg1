@@ -42,31 +42,31 @@ public class Main extends Application {
 		startGame();	
 	}
 	
-	public void startGame() {
+	public void startGame() {  //start the game
 		new StartEndScreen(background,animal,nameEnter,froggerback);
 		nextLevel=true;
 	}
 	
-	public void Level2() {
+	public void Level2() {  //start level 2
 		new Level2(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 		
 	}
 	
-	public void Level3() {
+	public void Level3() {  //start level 3
 		new Level3(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 	}
 	
-	public void Level4() {
+	public void Level4() {  //start level 4
 		new Level4(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 	}
 	
-	public void Level5() {
+	public void Level5() {  //start level 5
 		new Level5(background,animal,froggerback, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 	}
@@ -75,52 +75,52 @@ public class Main extends Application {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-            	if (animal.changeScore()) {
+            	if (animal.changeScore()) { //if change score is true, then set up the digits
             		setNumber(animal.getPoints());
             	}
-            	if(animal.getLife()<5&&levelCount!=1) {
-            		removeLife(background, animal.getLife());
+            	if(animal.getLife()<5&&levelCount!=1) { //if the life is less than five and is not in level 1, then tell the background to remove the life 
+            		removeLife(animal.getLife());
             	}
-            	if(animal.getStop()&&nextLevel) {
-            		levelCount++;
-    	            stop();
-    	            background.stop();
-    	            background.getChildren().clear();
-    				start();
-            		animal.setEnd();
-            		animal.setLife(5);
-            		nextLevel=false;
-            		if(levelCount==2) {
+            	if(animal.getStop()&&nextLevel) { //when a level is completed which all the destinations are occupied and next level is activated, then
+            		levelCount++;  //increase the level
+    	            stop();  //stop the background
+    	            background.stop();  //stop the animations of the actors
+    	            background.getChildren().clear(); //clear all the actors
+    				start(); //start again the background
+            		animal.setEnd(); // reset the destinations number
+            		animal.setLife(5); //reset the game life to 5
+            		nextLevel=false; //deactivate the next level
+            		if(levelCount==2) { //if level count = 2, then start level 2
+            			Level2();
+            		}
+            		else if(levelCount==3) { //if level count = 3, then start level 3
             			Level3();
             		}
-            		else if(levelCount==3) {
-            			Level3();
-            		}
-            		else if(levelCount==4) {
+            		else if(levelCount==4) { //if level count = 4, then start level 4
             			Level4();
             		}
-            		else if(levelCount==5) {
+            		else if(levelCount==5) { //if level count = 5, then start level 5
             			Level5();
             		}
     			}
-            	if ((animal.getStop()||animal.getLife()==0)&&levelCount!=1) {
+            	if ((animal.getStop()||animal.getLife()==0)&&levelCount!=1) { //if the destinations are all occupied or the 5 life are finished, and it is not level 1
             		int size=10;
             		int i=0;
             		ArrayList<String> arrayScoreString = new ArrayList<String>();
-            		ScoreList scorelist = new ScoreList(); //store the score to file
+            		ScoreList scorelist = new ScoreList();
             		BackgroundImage endingBackground = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800);
             		Text ScoreTitle = new Text("Game Over!");
             		Text ScoreTitle1 = new Text("You Have Won The Game!");
     	            Text ScoreTitle2 = new Text("Your Score: "+animal.getPoints()+"!");
-    	            //Text ScoreTitle3 = new Text("Highest Possible Score: 800");
+    	            //Text ScoreTitle3 = new Text("Highest Possible Score: 4750");
     	            Text ScoreTitle4 = new Text("High Scores");
     	            
             		background.add(endingBackground);
-            		scorelist.WriteReadFile(animal.getPoints(), nameEnter.getText());
+            		scorelist.WriteReadFile(animal.getPoints(), nameEnter.getText()); //write the score into file and read all the scores from the file 
     				
             		if(animal.getStop()) {
             			scorelist.addText(ScoreTitle1,"Verdana",30,Color.WHITE,90,200);
-            			background.getChildren().add(ScoreTitle1);
+            			background.getChildren().add(ScoreTitle1);  //add texts
             		}
             		else if(animal.getLife()==0) {
             			scorelist.addText(ScoreTitle,"Verdana",30,Color.WHITE,180,200);
@@ -134,7 +134,7 @@ public class Main extends Application {
 		    		background.getChildren().add(ScoreTitle4);
 
 	    			Set <String> keys = scorelist.getScoreList().keySet();
-		    		if(scorelist.getScoreList().size()<10){ 
+		    		if(scorelist.getScoreList().size()<10){ //if all the scores from the file is less than 10, then set the size = the size of the file 
 		    			size=scorelist.getScoreList().size(); }
 		    		for(String key:keys) {
 		    			arrayScoreString.add(Integer.toString(scorelist.getScoreList().get(key))); //change the integer to string
@@ -150,32 +150,32 @@ public class Main extends Application {
 		    		}
 
 		    		System.out.print("STOPP\n");
-    	            stop();
-    	            background.stop();
+    	            stop(); // stop background running
+    	            background.stop(); // stop actors' animation
 		    		
 		    		Button playAgain = new Button("Play Again");
 		    		scorelist.addButton(playAgain, 110, 700, 150, 50);
 		    		background.getChildren().add(playAgain);
-		    		playAgain.setOnAction(new EventHandler<ActionEvent>() { //if the start button gets pressed
+		    		playAgain.setOnAction(new EventHandler<ActionEvent>() { //if the play again button gets pressed, then restart the game
 		    			@Override
 		    		    public void handle(ActionEvent event) {
-		    				background.getChildren().clear();
-		    				animal.setPoints(0);
-		    				animal.setEnd();
-		    				start();
-		    				startGame();
-		    				levelCount=1;
+		    				background.getChildren().clear(); // clear everything
+		    				animal.setPoints(0);  //reset points to 0
+		    				animal.setEnd();  //reset the destinations
+		    				start(); //start background scene again
+		    				startGame(); //start the game in the beginning
+		    				levelCount=1;  //set the level count to 1
 		    			}
 		    		});
 		    		
 		    		Button quit = new Button("Quit");
 		    		scorelist.addButton(quit, 300, 700, 150, 50);
 		    		background.getChildren().add(quit);
-		    		quit.setOnAction(new EventHandler<ActionEvent>() { //if the start button gets pressed
+		    		quit.setOnAction(new EventHandler<ActionEvent>() { //if the quit button gets pressed, then the platform will be closed
 		    			@Override
 		    		    public void handle(ActionEvent event) {
-		    				background.stopMusic();
-		    	            Platform.exit();
+		    				background.stopMusic(); //stop music
+		    	            Platform.exit();  //exit the game
 		    			}
 		    		});
             	}
@@ -193,6 +193,10 @@ public class Main extends Application {
         timer.stop();
     }
     
+    /**
+     * this method is to set up the digits on the screen based on the points to show the current score
+     * @param n the points
+     */
     public void setNumber(int n) {
     	int shift = 0;
     	while (n > 0) {
@@ -200,8 +204,8 @@ public class Main extends Application {
     		int k = n - d * 10;
     		n = d;
     		background.add(new Digit(k, 30, 500 - shift, 30));
-    		if(animal.getChangeDigit()) {
-    		background.add(new Digit(0, 30, 470 - shift, 30));
+    		if(animal.getChangeDigit()) {  //this is to avoid the error on setting up the digits, especially when the points is being deducting from longer length to shorter length  
+    		background.add(new Digit(0, 30, 470 - shift, 30)); //example: when the previous point is 1030, the current point is 980 after deducting, the 1 digit from 1030 has to be set to 0 digit
     		}
     		shift+=30;
     	}
@@ -210,10 +214,9 @@ public class Main extends Application {
     
     /**
 	 * this method is to remove the life if the animal dies
-	 * @param background
-	 * @param life
+	 * @param life how many life left
 	 */
-	public void removeLife(MyStage background, int life) {
+	public void removeLife(int life) {
 		if(life==5) {	}
 		else if(life==4) {
 			background.remove(life5);

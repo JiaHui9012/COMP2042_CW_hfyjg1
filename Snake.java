@@ -2,6 +2,11 @@ package p4_group_8_repo;
 
 import javafx.scene.image.Image;
 
+/**
+ * this class represents the actor snake 
+ * @author Jia Hui
+ *
+ */
 public class Snake extends Actor {
 
 	private double speed;

@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the turtle
- * set the image, speed, acting,...
  * @author Jia Hui
  *
  */

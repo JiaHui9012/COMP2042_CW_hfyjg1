@@ -1,7 +1,5 @@
 package p4_group_8_repo;
 
-import java.util.ArrayList;
-
 import javafx.event.EventHandler;
 
 import javafx.scene.image.Image;
@@ -40,13 +38,12 @@ public class Animal extends Actor {
 	private double w = 800;
 	private int life=5;
 	private double speed[] = new double[4];
-	ArrayList<End> inter = new ArrayList<End>();
 	
 	public Animal() {}
 	
 	/**
 	 * this constructor is to set up the initial looks of the animal frog when it faces different directions
-	 * @param imageLink
+	 * @param imageLink this parameter is the link of the image
 	 */
 	public Animal(String imageLink) {
 		setImageXY(300, 679.8+movement, new Image(imageLink, imgSize, imgSize, true, true));
@@ -173,7 +170,7 @@ public class Animal extends Actor {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {  //if the frog gets intersecting with the obstacle, then carDeath=true
 			carDeath = true;
 		}
-		if (getIntersectingObjects(Snake.class).size() >= 1) {  //if the frog gets intersecting with the obstacle, then carDeath=true
+		if (getIntersectingObjects(Snake.class).size() >= 1) {  //if the frog gets intersecting with the snake, then carDeath=true
 			carDeath = true;
 		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {  //if the frog gets intersecting with the log
@@ -193,8 +190,7 @@ public class Animal extends Actor {
 			}
 		}
 		else if (getIntersectingObjects(End.class).size() >= 1) {  //if the frog gets intersecting with its destination
-			inter = (ArrayList<End>) getIntersectingObjects(End.class);
-			if (getIntersectingObjects(End.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied 
+			if (getIntersectingObjects(End.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied by other frogs
 				end--;
 				deductPoints(); //points-=50; deduct the points
 			}
@@ -203,16 +199,16 @@ public class Animal extends Actor {
 			w=800;
 			getIntersectingObjects(End.class).get(0).setEnd();
 			end++;
-			setX(300);
-			setY(679.8+movement);
+			setX(300); //reset the x position of the frog
+			setY(679.8+movement); //reset the y position of the frog
 		}
-		else if(getIntersectingObjects(Fly.class).size() >= 1) {
-			if (getIntersectingObjects(Fly.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied 
+		else if(getIntersectingObjects(Fly.class).size() >= 1) { //if the frog gets intersecting with flies in the destinations
+			if (getIntersectingObjects(Fly.class).get(0).isActivated()) {  //if the frog jumps to the destination that is already occupied by other frogs
 				end--;
 				deductPoints(); //points-=50; deduct the points
 			}
 			else {
-				if(getIntersectingObjects(Fly.class).get(0).isOccupied()) {
+				if(getIntersectingObjects(Fly.class).get(0).isOccupied()) { //if the frog catches a fly then earns extra 50 points which is total 100 points
 					setPoints(getPoints()+100);
 				}
 				else {
@@ -222,8 +218,8 @@ public class Animal extends Actor {
 			changeScore = true;
 			getIntersectingObjects(Fly.class).get(0).setEnd();
 			end++;
-			setX(300);
-			setY(679.8+movement);
+			setX(300); //reset the x position of the frog
+			setY(679.8+movement); //reset the y position of the frog
 		}
 		else if (getY()<413){  //if the frog jumps into the river, then waterDeath=true
 			waterDeath = true;
@@ -231,8 +227,8 @@ public class Animal extends Actor {
 	}
 	
 	/**
-	 * this method represents if the five destination are occupied, then the game will stop
-	 * @return this returns true if the parameter end equals to 5
+	 * this method represents if the five destinations are occupied, then it will return true
+	 * @return returns true if the parameter end equals to 5
 	 */
 	public boolean getStop() {
 		return end==5;
@@ -245,34 +241,50 @@ public class Animal extends Actor {
 		end=0;
 	}
 	
+	/**
+	 * get the integer of the parameter end
+	 * @return return how many destinations are occupied
+	 */
 	public int getEnd() {
 		return end;
 	}
 	
 	/**
 	 * set the life
-	 * @param life
+	 * @param life it indicates how many life to set up 
 	 */
 	public void setLife(int life) {
 		this.life=life;
 	}
 	
+	/**
+	 * get the integer of the parameter life
+	 * @return return how many life left
+	 */
 	public int getLife() {
 		return this.life;
 	}
 	
 	/**
-	 * set the points
-	 * @param points
+	 * set the score of the player into the points
+	 * @param points it is the score of the player gets
 	 */
 	public void setPoints(int points) {
 		this.points=points;
 	}
 	
+	/**
+	 * get the points
+	 * @return return the current points
+	 */
 	public int getPoints() {
 		return points;
 	}
 	
+	/**
+	 * this method is to decrease the points and check if the length of previous point are longer than the current points,
+	 * if yes, then changeDigit = true 
+	 */
 	public void deductPoints() {
 		if (getPoints()>50) {
 			int temp=getPoints();
@@ -283,17 +295,24 @@ public class Animal extends Actor {
 		}
 	}
 	
+	/**
+	 * reset the changeDigit to false
+	 */
 	public void setChangeDigit() {
 		changeDigit=false;
 	}
 	
+	/**
+	 * get the value of changeDigit
+	 * @return return true if needed to change the digit 
+	 */
 	public boolean getChangeDigit() {
 		return changeDigit;
 	}
 	
 	/**
-	 * this method is used to indicate if the screen needs to change score 
-	 * @return
+	 * this method is to indicate if the screen needs to change score 
+	 * @return if yes return true and reset the changeScore to false, else return false 
 	 */
 	public boolean changeScore() {
 		if (changeScore) {
@@ -318,32 +337,32 @@ public class Animal extends Actor {
 	
 	/**
 	 * this method is to reset the frog when it dies/jumps into the river  
-	 * @param cardeath 
-	 * @param waterdeath
+	 * @param cardeath this parameter is to indicate if it is a car death
+	 * @param waterdeath this parameter is to indicate if it is a water death
 	 */
 	public void deathReset(boolean cardeath, boolean waterdeath) {
-		life--;
-		setImageXY(300, 679.8+movement, new Image("file:src/p4_group_8_repo/resources/froggerUp.png", imgSize, imgSize, true, true));
-		if(cardeath) { carDeath = false;}
-		else if(waterdeath) { waterDeath = false;}
-		carD = 0;
-		noMove = false;
-		deductPoints();
-		changeScore = true;
+		life--; //deduct the life when death happened
+		setImageXY(300, 679.8+movement, new Image("file:src/p4_group_8_repo/resources/froggerUp.png", imgSize, imgSize, true, true)); //reset the image of the frog
+		if(cardeath) { carDeath = false;} //reset the carDeath to false
+		else if(waterdeath) { waterDeath = false;} //reset the waterDeath to false
+		carD = 0; //reset carD = 0
+		noMove = false; //reset noMove to false
+		deductPoints(); //deduct points method
+		changeScore = true; //indicate to change score
 	}
 	
 	/**
-	 * get the speeds of the objects to set the speed of the animal
+	 * get the speeds of the objects in the river to set the speed of the animal, this is to let the animal moves the same speed when it stands on the moving objects
 	 * @param log represents the speed of log 
 	 * @param logLeft represents the speed of log moving left 
 	 * @param turtle represents the speed of turtle 
 	 * @param wetTurtle represents the speed of wet turtle
 	 */
 	public void getSpeed(double log, double logLeft, double turtle, double wetTurtle) {
-		speed[0] = log;
-		speed[1] = logLeft;
-		speed[2] = turtle;
-		speed[3] = wetTurtle;
+		speed[0] = log;  //set the speed of the log moving right from the left into the array which index is 0
+		speed[1] = logLeft; //set the speed of the log moving left from the right into the array which index is 1 
+		speed[2] = turtle; //set the speed of the turtle into the array which index is 2 
+		speed[3] = wetTurtle; //set the speed of the wetTurtle into the array which index is 3 
 	}
 
 }

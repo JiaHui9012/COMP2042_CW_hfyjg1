@@ -35,7 +35,7 @@ public class ScoreList extends StartEndScreen {
 	public void WriteReadFile(int point, String name) {
 		File file= new File("Score.txt");
 		try { 
-			if (!file.exists()) {
+			if (!file.exists()) {  //if the file is not exist then create a new one
 				file.createNewFile();
 			}
 			BufferedWriter output = new BufferedWriter(new FileWriter(file, true)); //write the score into the file
@@ -77,6 +77,10 @@ public class ScoreList extends StartEndScreen {
 	    }
 	}
 	
+	/**
+	 * get the score list
+	 * @return return the sorted array list which have the scores from the file
+	 */
 	public Map<String, Integer> getScoreList() {
 		return result;
 	}
