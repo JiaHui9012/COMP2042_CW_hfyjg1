@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the obstacle and its action
+ * it is a subclass of Actor
  * @author Jia Hui
  *
  */

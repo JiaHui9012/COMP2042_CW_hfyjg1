@@ -4,20 +4,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
- * this class represents Level 4 of the game
+ * this class represents Level 4 Stage of the game
  * this class is to add all the needed things into level 4's scene
  * This level includes all objects in level 3 and the newly added Snake
+ * it is a subclass of MyStage
  * @author Jia Hui
  *
  */
-public class Level4 extends World {
+public class Level4 extends MyStage {
 
-	public Level4(MyStage background, Animal animal, BackgroundImage froggerback, GameLife life1, GameLife life2, GameLife life3, GameLife life4, GameLife life5) {
+	public Level4(MyStage background, Animal animal, GameLife life1, GameLife life2, GameLife life3, GameLife life4, GameLife life5) {
 		// TODO Auto-generated constructor stub
-		StartEndScreen start = new StartEndScreen();
 		Text level = new Text("Level 4: Watch Out For Snake!");
 		
-		background.add(froggerback);
+		background.add(new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800));
 		background.add(new Log("file:src/p4_group_8_repo/resources/log3.png", 150, 0, 166, 0.75));
 		background.add(new Log("file:src/p4_group_8_repo/resources/log3.png", 150, 220, 166, 0.75));
 		background.add(new Log("file:src/p4_group_8_repo/resources/log3.png", 150, 440, 166, 0.75));
@@ -62,15 +62,9 @@ public class Level4 extends World {
 		background.add(life3);
 		background.add(life4);
 		background.add(life5);
-		start.addText(level,"Verdana",18,Color.WHITE,10,780);
+		addText(level,"Verdana",18,Color.WHITE,10,780);
 		background.getChildren().add(level);
 		background.start();
-	}
-
-	@Override
-	public void act(long now) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

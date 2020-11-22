@@ -4,17 +4,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
- * this class represents Level 1 of the game
+ * this class represents the Stage of Level 1 of the game
  * this class is to add all the needed things into level 1's scene
+ * it is a subclass of MyStage
  * 
  * @author Jia Hui
  *
  */
-public class Level1 extends World {
+public class Level1 extends MyStage {
 
-	public Level1(MyStage background, Animal animal, BackgroundImage froggerback) {
+	public Level1(MyStage background, Animal animal) {
 		// TODO Auto-generated constructor stub
-		StartEndScreen start = new StartEndScreen();
 		Text level = new Text("Level 1: Let's Warm Up!");
 		
 		background.add(new Log("file:src/p4_group_8_repo/resources/log3.png", 150, 0, 166, 0.75)); //add logs into the game
@@ -55,15 +55,9 @@ public class Level1 extends World {
 		background.add(new Obstacle("file:src/p4_group_8_repo/resources/car1Left.png", 500, 490, -5, 50, 50));
 		
 		background.add(new Digit(0, 30, 500, 30)); //set up the digit to the screen 
-		start.addText(level,"Verdana",18,Color.WHITE,10,780);
+		addText(level,"Verdana",18,Color.WHITE,10,780);
 		background.getChildren().add(level); //add the title of the level
 		background.start(); //start the animation/acting of all the actors 
-	}
-
-	@Override
-	public void act(long now) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

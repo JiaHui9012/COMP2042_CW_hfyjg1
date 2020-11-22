@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package p4_group_8_repo.test;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Test;
+
+import p4_group_8_repo.ScoreList;
 
 /**
  * this is a JUnit test to test the ScoreList class by using JUnit 4

@@ -15,7 +15,8 @@ import javafx.scene.layout.Pane;
 
 /**
  * this class represents the game world
- * it can add/remove the actors to the world and make the actor starts its action/animation
+ * it can add/remove the actors to the world and start/stop the actors for their actions/animations
+ * 
  * @author Jia Hui
  *
  */

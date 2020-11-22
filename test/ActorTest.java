@@ -1,8 +1,11 @@
-package p4_group_8_repo;
+package p4_group_8_repo.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import p4_group_8_repo.Animal;
+import p4_group_8_repo.End;
 
 /**
  * this is a JUnit test to test Actor class's subclasses by using JUnit 4

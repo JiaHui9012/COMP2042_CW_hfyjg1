@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the wet turtle
+ * it is a subclass of Actor
  * @author Jia Hui
  *
  */

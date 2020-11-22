@@ -1,8 +1,5 @@
 package p4_group_8_repo;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,15 +8,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 	private AnimationTimer timer;
 	private MyStage background = new MyStage();
 	private Animal animal = new Animal("file:src/p4_group_8_repo/resources/froggerUp.png");
-	private BackgroundImage froggerback = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800);
 	private TextField nameEnter = new TextField("Player");
 	private boolean nextLevel=false;
 	private int levelCount=1;
@@ -34,7 +28,7 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception { //setting up the scene and start the game
 		Scene scene  = new Scene(background,564,800);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -43,31 +37,31 @@ public class Main extends Application {
 	}
 	
 	public void startGame() {  //start the game
-		new StartEndScreen(background,animal,nameEnter,froggerback);
+		new StartScene(background,animal,nameEnter);
 		nextLevel=true;
 	}
 	
 	public void Level2() {  //start level 2
-		new Level2(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		new Level2(background,animal, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 		
 	}
 	
 	public void Level3() {  //start level 3
-		new Level3(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		new Level3(background,animal, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 	}
 	
 	public void Level4() {  //start level 4
-		new Level4(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		new Level4(background,animal, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 		nextLevel=true;
 	}
 	
 	public void Level5() {  //start level 5
-		new Level5(background,animal,froggerback, life1, life2, life3, life4 ,life5);
+		new Level5(background,animal, life1, life2, life3, life4 ,life5);
 		setNumber(animal.getPoints());
 	}
 	
@@ -91,7 +85,7 @@ public class Main extends Application {
             		animal.setLife(5); //reset the game life to 5
             		nextLevel=false; //deactivate the next level
             		if(levelCount==2) { //if level count = 2, then start level 2
-            			Level2();
+            			Level3();
             		}
             		else if(levelCount==3) { //if level count = 3, then start level 3
             			Level3();
@@ -104,57 +98,14 @@ public class Main extends Application {
             		}
     			}
             	if ((animal.getStop()||animal.getLife()==0)&&levelCount!=1) { //if the destinations are all occupied or the 5 life are finished, and it is not level 1
-            		int size=10;
-            		int i=0;
-            		ArrayList<String> arrayScoreString = new ArrayList<String>();
-            		ScoreList scorelist = new ScoreList();
-            		BackgroundImage endingBackground = new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800);
-            		Text ScoreTitle = new Text("Game Over!");
-            		Text ScoreTitle1 = new Text("You Have Won The Game!");
-    	            Text ScoreTitle2 = new Text("Your Score: "+animal.getPoints()+"!");
-    	            //Text ScoreTitle3 = new Text("Highest Possible Score: 4750");
-    	            Text ScoreTitle4 = new Text("High Scores");
-    	            
-            		background.add(endingBackground);
-            		scorelist.WriteReadFile(animal.getPoints(), nameEnter.getText()); //write the score into file and read all the scores from the file 
-    				
-            		if(animal.getStop()) {
-            			scorelist.addText(ScoreTitle1,"Verdana",30,Color.WHITE,90,200);
-            			background.getChildren().add(ScoreTitle1);  //add texts
-            		}
-            		else if(animal.getLife()==0) {
-            			scorelist.addText(ScoreTitle,"Verdana",30,Color.WHITE,180,200);
-            			background.getChildren().add(ScoreTitle);
-            		}
-		    		scorelist.addText(ScoreTitle2,"Verdana",25,Color.WHITE,170,240);
-		    		background.getChildren().add(ScoreTitle2);
-		    		//scorelist.addText(ScoreTitle3,"Verdana",15,Color.WHITE,170,270);
-		    		//background.getChildren().add(ScoreTitle3);
-		    		scorelist.addText(ScoreTitle4,"Verdana",25,Color.WHITE,100,320);
-		    		background.getChildren().add(ScoreTitle4);
-
-	    			Set <String> keys = scorelist.getScoreList().keySet();
-		    		if(scorelist.getScoreList().size()<10){ //if all the scores from the file is less than 10, then set the size = the size of the file 
-		    			size=scorelist.getScoreList().size(); }
-		    		for(String key:keys) {
-		    			arrayScoreString.add(Integer.toString(scorelist.getScoreList().get(key))); //change the integer to string
-		    		}
-		    		for(String key:keys) {
-		    			Text t = new Text((i+1)+")  "+key+"   "+arrayScoreString.get(i));
-		    			scorelist.addText(t, "Verdana", 20, Color.WHITE, 100, 360+(i*30));
-		    			background.getChildren().add(t); //show scores to the screen
-		    			i++;
-		    			if(i==size) {
-		    				break;
-		    			}
-		    		}
+            		new EndScene(background,animal,nameEnter);
 
 		    		System.out.print("STOPP\n");
     	            stop(); // stop background running
     	            background.stop(); // stop actors' animation
 		    		
 		    		Button playAgain = new Button("Play Again");
-		    		scorelist.addButton(playAgain, 110, 700, 150, 50);
+		    		background.addButton(playAgain, 110, 700, 150, 50);
 		    		background.getChildren().add(playAgain);
 		    		playAgain.setOnAction(new EventHandler<ActionEvent>() { //if the play again button gets pressed, then restart the game
 		    			@Override
@@ -169,7 +120,7 @@ public class Main extends Application {
 		    		});
 		    		
 		    		Button quit = new Button("Quit");
-		    		scorelist.addButton(quit, 300, 700, 150, 50);
+		    		background.addButton(quit, 300, 700, 150, 50);
 		    		background.getChildren().add(quit);
 		    		quit.setOnAction(new EventHandler<ActionEvent>() { //if the quit button gets pressed, then the platform will be closed
 		    			@Override
@@ -183,13 +134,13 @@ public class Main extends Application {
         };
     }
 	
-	public void start() {
+	public void start() { //start the game 
 		background.playMusic();
     	createTimer();
         timer.start();
     }
 
-    public void stop() {
+    public void stop() { //stop the game
         timer.stop();
     }
     

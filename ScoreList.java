@@ -20,13 +20,12 @@ import java.util.stream.Collectors;
  * @author Jia Hui
  *
  */
-public class ScoreList extends StartEndScreen {
+public class ScoreList {
 
 	ArrayList<Integer> arrayscore = new ArrayList<Integer>();
 	ArrayList<String> arrayname = new ArrayList<String>();
 	Map<String, Integer> unsortedresult;
 	Map<String, Integer> result;
-	String name;
 	
 	public ScoreList() {
 		// TODO Auto-generated constructor stub

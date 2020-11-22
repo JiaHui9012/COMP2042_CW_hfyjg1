@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the log object
+ * it is a subclass of Actor
  */
 public class Log extends Actor {
 

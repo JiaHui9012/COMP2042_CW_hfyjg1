@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the actor snake 
+ * it is a subclass of Actor
  * @author Jia Hui
  *
  */

@@ -7,9 +7,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * this class represents 
- * the characters/animals of the game 
- * which is the frog 
+ * this class represents the characters/animals of the game which is the frog 
+ * it is a subclass of Actor
  * 
  * @author Jia Hui
  *
@@ -216,6 +215,7 @@ public class Animal extends Actor {
 				}
 			}
 			changeScore = true;
+			w=800;
 			getIntersectingObjects(Fly.class).get(0).setEnd();
 			end++;
 			setX(300); //reset the x position of the frog

@@ -5,19 +5,18 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * this class represents the starting and ending scene for the game
+ * this class represents the starting stage of the game
  * @author Jia Hui
  *
  */
-public class StartEndScreen extends World {
+public class StartScene extends MyStage {
 
-	public StartEndScreen() {}
+	public StartScene() {}
 	
-	public StartEndScreen(MyStage background, Animal animal, TextField nameEnter, BackgroundImage froggerback) {
+	public StartScene(MyStage background, Animal animal, TextField nameEnter) {
 		BackgroundImage start = new BackgroundImage("file:src/p4_group_8_repo/resources/theFrog.png",230,230);
 		Text name = new Text("Enter Your Name:");
 		Button startButton = new Button("Start");
@@ -33,24 +32,24 @@ public class StartEndScreen extends World {
 		Text infotext3 = new Text("The middle of the screen, after the \nroad, contains a median where the \nplayer must prepare to navigate the \nriver by jumping on swiftly moving \nlogs and the backs of turtles. Be aware \nthere will be a snake in the middle \nroad after level 3.");
 		Text infotext4 = new Text("The top of the screen contains five \n\"frog homes\" which are the \ndestinations. When all five frogs are \ndirected home, the game ends. After \nlevel 2, flies will appear at the \ndestinations at certain times, player \ncan catch them to earn more points.");
 		
-		background.add(froggerback); //add background
+		background.add(new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800)); //add background
 		
 		//setting up all the details into the starting scene 
 		start.setX(20); 
 		start.setY(170);
 		background.add(start);
 		addText(about,"Verdana",25,Color.WHITE,260,200);
-		background.getChildren().add(about);
+		background.getChildren().add(about); //add title "About"
 		addText(abouttext,"Verdana",19,Color.WHITE,260,230);
-		background.getChildren().add(abouttext);
+		background.getChildren().add(abouttext); //add contents for About
 		addText(name,"Verdana",25,Color.WHITE,80,550);
 		background.getChildren().add(name);
 		addTextField(nameEnter,330,530);
-		background.getChildren().add(nameEnter);
+		background.getChildren().add(nameEnter); //let players insert their player name
 		addButton(startButton, 200, 580, 150, 50);
-		background.getChildren().add(startButton);
+		background.getChildren().add(startButton); //add the start button
 		addButton(infoButton, 200, 630, 150, 50);
-		background.getChildren().add(infoButton);
+		background.getChildren().add(infoButton); //add the "how to play" button
 		
 		infoButton.setOnAction(new EventHandler<ActionEvent>() { //if the info button gets pressed then show the info contents about the game
 			@Override
@@ -110,56 +109,9 @@ public class StartEndScreen extends World {
 				background.getChildren().remove(name);
 				background.getChildren().remove(nameEnter);
 				
-				new Level1(background,animal,froggerback); // go to level 1
+				new Level1(background,animal); // go to level 1
 			}
 		});
 	}
 	
-	/**
-	 * set up the text
-	 * @param text it is the text going to add on the screen
-	 * @param font it is to indicate what font to use
-	 * @param fontsize it is to indicate the size of the font
-	 * @param color it is to indicate the color of the text
-	 * @param x it is to set up the x position of the text
-	 * @param y it is to set up the y position of the text
-	 */
-	public void addText(Text text, String font, double fontsize, Color color, double x, double y) {
-		text.setFont(Font.font (font, fontsize));
-		text.setFill(color);
-		text.setX(x);
-		text.setY(y);
-	}
-	
-	/**
-	 * set up the button
-	 * @param button it is the Button object
-	 * @param x it is to set up the x position of the button object
-	 * @param y it is to set up the y position of the button object
-	 * @param a it is to set up the size of the button object
-	 * @param b it is to set up the size of the button object
-	 */
-	public void addButton(Button button, double x, double y, double a, double b) {
-    	button.setLayoutX(x);
-		button.setLayoutY(y);
-		button.setMinSize(a,b);
-		button.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 2em; -fx-font-weight: bold;");
-	}
-	
-	/**
-	 * set up the text field
-	 * @param text the object of the text field
-	 * @param x it is to set up the x position of the object
-	 * @param y it is to set up the y position of the object
-	 */
-	public void addTextField(TextField text, double x, double y) {
-		text.setLayoutX(x);
-		text.setLayoutY(y);
-		text.setMinSize(10, 10);
-		text.setEditable(true);
-	}
-	
-	@Override
-	public void act(long now) {	}
-
 }

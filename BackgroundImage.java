@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class is to set the images that needed in the game
+ * it is a subclass of Actor
  * @author Jia Hui
  *
  */
