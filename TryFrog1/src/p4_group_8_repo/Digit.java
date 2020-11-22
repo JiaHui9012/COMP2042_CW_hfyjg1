@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 /**
  * this class represents the digit that appears in the top right screen to indicate the score 
+ * it is a subclass of Actor
  * @author Jia Hui
  *
  */
