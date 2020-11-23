@@ -85,7 +85,7 @@ public class Main extends Application {
             		animal.setLife(5); //reset the game life to 5
             		nextLevel=false; //deactivate the next level
             		if(levelCount==2) { //if level count = 2, then start level 2
-            			Level3();
+            			Level2();
             		}
             		else if(levelCount==3) { //if level count = 3, then start level 3
             			Level3();

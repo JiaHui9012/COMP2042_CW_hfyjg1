@@ -12,3 +12,9 @@ Hui 1950
 Player 2010
 Player 150
 Player 1710
+Alice 2920
+Jane 2690
+Jane 3300
+Berlin 3930
+Ben 666
+Ben 666
