@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="564.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/iKogsKW.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="111.0" fitWidth="226.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/WASD.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="226.0" layoutX="21.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/bottomhalf.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="146.0" fitWidth="226.0" layoutX="21.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/middleriver.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="226.0" layoutX="21.0" layoutY="606.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/topdestinations.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="276.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use WASD Keys/Arrow Keys to Play" wrappingWidth="239.123779296875">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="276.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="On the bottom half of the screen, the player must successfully guide the frog between opposing lanes of trucks, cars, and other vehicles, to avoid becoming roadkill." wrappingWidth="239.123779296875">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="275.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The middle of the screen, after the road, contains a median where the player must prepare to navigate the river by jumping on swiftly moving logs and the backs of turtles. Be aware there will be a snake in the middle road after level 3." wrappingWidth="271.2000122070312">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="276.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The top of the screen contains five &quot;frog homes&quot; which are the destinations. When all five frogs are directed home, the game ends. After level 2, flies will appear at the destinations at certain times, player can catch them to earn more points." wrappingWidth="279.20001220703125">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

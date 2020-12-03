@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import p4_group_8_repo.ScoreList;
+import p4_group_8_repo.EndScene.ScoreList;
 
 /**
  * this is a JUnit test to test the ScoreList class by using JUnit 4
