@@ -1,4 +1,4 @@
-package p4_group_8_repo.StartScene;
+	package p4_group_8_repo.StartScene;
 
 import p4_group_8_repo.Game.Game;
 import p4_group_8_repo.StartScene.Instruction;

@@ -19,5 +19,5 @@ public class FlyTest {
 	public void testFlyOccupied() { //test the initiate value of the method isActivated in the End class
 		assertFalse(fly.isOccupied()); //the initiate value should be false
 	}
-
+	
 }

@@ -31,7 +31,7 @@ public class GameView {
     		}
     		shift+=30;
     	}
-    	model.getAnimal().setChangeDigit();
+    	model.getAnimal().resetChangeDigit();
     }
     
     /**

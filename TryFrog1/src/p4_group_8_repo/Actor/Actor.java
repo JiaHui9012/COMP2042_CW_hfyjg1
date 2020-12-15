@@ -82,7 +82,7 @@ public abstract class Actor extends ImageView{
 
     /**
      * this method is to represent the action of the object, how the object is going to act
-     * @param now it is the current running time when the application starts 
+     * @param now the current time stamp of the current frame given in nanoseconds 
      */
     public abstract void act(long now);
 

@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
  *
  */
 public class Obstacle extends Actor {
+	
 	private double speed;
 	
 	@Override

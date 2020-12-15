@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  */
 public class Digit extends Actor{
 	
-	Image im1;
+	private Image im1;
 	
 	@Override
 	public void act(long now) {}

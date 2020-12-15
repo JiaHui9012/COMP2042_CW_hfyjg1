@@ -20,7 +20,7 @@ public class Animal extends Actor {
 	private double movement = 13.3333333*2, movementX = 10.666666*2;
 	private boolean carDeath = false, waterDeath = false;
 	private boolean changeScore = false, changeDigit=false;
-	private int carD = 0, life=5;
+	private int death = 0, life=5;
 	private double w = 800;
 	private double speed[] = new double[4];
 	
@@ -114,43 +114,10 @@ public class Animal extends Actor {
 			move(-movement*2, 0);
 		}
 		if (carDeath) {  // this represents how the frog acts if it gets road kill
-			noMove = true;
-			if ((now)% 11 ==0) { 
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/cardeath1.png", imgSize, imgSize, true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/cardeath2.png", imgSize, imgSize, true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/cardeath3.png", imgSize, imgSize, true, true));
-			}
-			if (carD == 4) {
-				deathReset(true,false);  //when it dies, the system will reset the frog to the initial position 
-			}
+			CarDeath(now);
 		}
 		if (waterDeath) {  // this represents how the frog acts if it jumps into the river
-			noMove = true;
-			if ((now)% 11 ==0) {
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath1.png", imgSize,imgSize , true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath2.png", imgSize,imgSize , true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath3.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 4) {
-				setImage(new Image("file:src/p4_group_8_reporesources//waterdeath4.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 5) {
-				deathReset(false,true);  //when it disappears in the screen, the system will reset the frog to the initial position
-			}
+			WaterDeath(now);
 		}
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {  //if the frog gets intersecting with the obstacle, then carDeath=true
 			carDeath = true;
@@ -284,7 +251,7 @@ public class Animal extends Actor {
 	/**
 	 * reset the changeDigit to false
 	 */
-	public void setChangeDigit() {
+	public void resetChangeDigit() {
 		changeDigit=false;
 	}
 	
@@ -322,6 +289,54 @@ public class Animal extends Actor {
 	}
 	
 	/**
+	 * method to set the death images of the frog if the frog gets hit by the car
+	 * @param now the current time stamp of the current frame given in nanoseconds
+	 */
+	public void CarDeath(long now) {
+		noMove = true;
+		if ((now)% 11 ==0) { 
+			death++;
+		}
+		switch(death) {
+		case 1: setImage(new Image("file:src/p4_group_8_repo/resources/cardeath1.png", imgSize, imgSize, true, true));
+				break;
+		case 2: setImage(new Image("file:src/p4_group_8_repo/resources/cardeath2.png", imgSize, imgSize, true, true));
+				break;
+		case 3: setImage(new Image("file:src/p4_group_8_repo/resources/cardeath3.png", imgSize, imgSize, true, true));
+				break;
+		case 4: deathReset(true,false);  //when it dies, the system will reset the frog to the initial position 
+				break;
+		default:
+				break;
+		}
+	}
+	
+	/**
+	 * method to set the images of the frog if the frog jumps into the water
+	 * @param now the current time stamp of the current frame given in nanoseconds
+	 */
+	public void WaterDeath(long now) {
+		noMove = true;
+		if ((now)% 11 ==0) {
+			death++;
+		}
+		switch(death) {
+		case 1: setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath1.png", imgSize,imgSize , true, true));
+				break;
+		case 2: setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath2.png", imgSize,imgSize , true, true));
+				break;
+		case 3: setImage(new Image("file:src/p4_group_8_repo/resources/waterdeath3.png", imgSize,imgSize , true, true));
+				break;
+		case 4: setImage(new Image("file:src/p4_group_8_reporesources//waterdeath4.png", imgSize,imgSize , true, true));
+				break;
+		case 5: deathReset(false,true); //when it disappears in the screen, the system will reset the frog to the initial position
+				break;
+		default:
+				break;
+		}
+	}
+	
+	/**
 	 * this method is to reset the frog when it dies/jumps into the river  
 	 * @param cardeath this parameter is to indicate if it is a car death
 	 * @param waterdeath this parameter is to indicate if it is a water death
@@ -331,7 +346,7 @@ public class Animal extends Actor {
 		setImageXY(300, 679.8+movement, new Image("file:src/p4_group_8_repo/resources/froggerUp.png", imgSize, imgSize, true, true)); //reset the image of the frog
 		if(cardeath) { carDeath = false;} //reset the carDeath to false
 		else if(waterdeath) { waterDeath = false;} //reset the waterDeath to false
-		carD = 0; //reset carD = 0
+		death = 0; //reset death = 0
 		noMove = false; //reset noMove to false
 		deductPoints(); //deduct points method
 		changeScore = true; //indicate to change score

@@ -27,7 +27,7 @@ public class Fly extends Actor {
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method stub
-		if(!activated) {
+		if(!isActivated()) {
 			if (now/900000000  % 10 ==0||now/900000000  % 10 ==1) { //in certain times, set the fly to appear at the destination
 				setImage(fly);
 				occupied=true;
