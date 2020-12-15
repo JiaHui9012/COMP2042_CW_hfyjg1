@@ -11,12 +11,12 @@ public class FlyTest {
 	Fly fly = new Fly();
 	
 	@Test
-	public void testEndActivated() { //test the initiate value of the method isActivated in the End class
+	public void testEndActivated() { //test the initiate value of the method isActivated in the Fly class
 		assertFalse(fly.isActivated()); //the initiate value should be false
 	}
 	
 	@Test
-	public void testFlyOccupied() { //test the initiate value of the method isActivated in the End class
+	public void testFlyOccupied() { //test the initiate value of the method isOccupied in the Fly class
 		assertFalse(fly.isOccupied()); //the initiate value should be false
 	}
 	

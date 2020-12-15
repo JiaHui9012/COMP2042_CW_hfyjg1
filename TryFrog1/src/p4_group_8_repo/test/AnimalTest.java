@@ -22,14 +22,14 @@ public class AnimalTest {
 	}
 	
 	@Test
-	public void testDeductPoints() { //test if the points is set correctly
-		animal.setPoints(666);
-		animal.deductPoints(); //set the points
+	public void testDeductPoints() { //test if the points is getting deduct correctly
+		animal.setPoints(666); //set the points
+		animal.deductPoints(); //deduct the points
 		assertEquals(616,animal.getPoints());
 	}
 	
 	@Test
-	public void testChangeScore() { //test if the points is set correctly
+	public void testChangeScore() { //test if the initial value of chnageScore
 		boolean changeScore = animal.changeScore();
 		assertEquals(false,changeScore);
 	}

@@ -31,6 +31,11 @@ public class ScoreList {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * method to write and read the scores
+	 * @param point the player's score
+	 * @param name the player's name
+	 */
 	public void WriteReadFile(int point, String name) {
 		File file= new File("Score.txt");
 		try { 

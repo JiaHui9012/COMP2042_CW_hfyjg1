@@ -28,6 +28,7 @@ public class Game extends Application {
 	private GameModel model = new GameModel();
 	private GameView view = new GameView(model);
 	private GameController controller = new GameController(model,view);
+	private Levels level;
 	
 	public Game() { }
 	
@@ -51,42 +52,10 @@ public class Game extends Application {
 		background.add(new BackgroundImage("file:src/p4_group_8_repo/resources/iKogsKW.png",600,800));
 		controller.setMyStage(background);
 		controller.setAnimal(animal);
-		Level1(); //start level 1
-		start();  //start timer
-	}
-
-	public void Level1() {  //method call level 1
 		levelCount=1;
-		new Level1(background,animal,controller);
-		nextLevel=true;
-	}
-	
-	public void Level2() {  //start level 2
-		new Level2(background,animal, controller);
-		controller.setPoints(animal.getPoints());
-		controller.setNumber();
-		nextLevel=true;
-		
-	}
-	
-	public void Level3() {  //start level 3
-		new Level3(background,animal, controller);
-		controller.setPoints(animal.getPoints());
-		controller.setNumber();
-		nextLevel=true;
-	}
-	
-	public void Level4() {  //start level 4
-		new Level4(background,animal, controller);
-		controller.setPoints(animal.getPoints());
-		controller.setNumber();
-		nextLevel=true;
-	}
-	
-	public void Level5() {  //start level 5
-		new Level5(background,animal, controller);
-		controller.setPoints(animal.getPoints());
-		controller.setNumber();
+		level = new Levels(background, animal, controller, nextLevel);
+		level.Level1(); //start level 1
+		start();  //start timer
 	}
 	
 	public void createTimer() {
@@ -101,7 +70,7 @@ public class Game extends Application {
             		controller.setLifeNumber(animal.getLife());
             		controller.removeLife();
             	}
-            	if(animal.getStop()&&nextLevel) { //when a level is completed which all the destinations are occupied and next level is activated, then
+            	if(animal.getStop()&&level.getNextLevel()) { //when a level is completed which all the destinations are occupied and next level is activated, then
             		levelCount++;  //increase the level
     	            stop();  //stop the background
     	            background.stop();  //stop the animations of the actors
@@ -111,16 +80,16 @@ public class Game extends Application {
             		animal.setLife(5); //reset the game life to 5
             		nextLevel=false; //deactivate the next level
             		if(levelCount==2) { //if level count = 2, then start level 2
-            			Level2();
+            			level.Level2();
             		}
             		else if(levelCount==3) { //if level count = 3, then start level 3
-            			Level3();
+            			level.Level3();
             		}
             		else if(levelCount==4) { //if level count = 4, then start level 4
-            			Level4();
+            			level.Level4();
             		}
             		else if(levelCount==5) { //if level count = 5, then start level 5
-            			Level5();
+            			level.Level5();
             		}
     			}
             	if ((animal.getStop()||animal.getLife()==0)&&levelCount!=1) { //if the destinations are all occupied or the 5 life are finished, and it is not level 1

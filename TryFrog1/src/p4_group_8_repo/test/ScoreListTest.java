@@ -27,7 +27,7 @@ public class ScoreListTest {
 	@Test
 	public void testArrayListIsSorted() { //test if the scores read into the array have been sorted in descending order
 		boolean sorted = false;
-		score1.WriteReadFile(666, "Ben");
+		score1.WriteReadFile(666, "Ben"); //write the score and name to the file
 		Set <String> keys = score1.getScoreList().keySet();
 		ArrayList<String> arrayScore = new ArrayList<String>();
 		for(String key:keys) {
