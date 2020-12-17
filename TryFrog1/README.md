@@ -92,7 +92,9 @@
  
 ## Git Use
 ----
- ![Screenshot](src/main/resources/Image/GitHub.png)
+<br/><img src="src/p4_group_8_repo/resources/GitHub.png" alt="Level1 Scene" width="500"/>
+<img src="src/p4_group_8_repo/resources/GitHub1.png" alt="Level2 Scene" width="500"/>
+<br/><img src="src/p4_group_8_repo/resources/GitHub2.png" alt="Level3 Scene" width="500"/>
 
 ## Remarks
 ----
